@@ -10,7 +10,10 @@ module.exports = {
         console.log(req.session)
         res.view('session/new');
     },
-    login: function (req,res,next) {
+    login: function (req, res, next) {
+        var oldDatObj = new Date();
+        var newDateObj = new Date(oldDatObj.getTime() + 60000)
+        req.session.cookie.expires = newDateObj;
         req.session.authenticated = true;
         console.log(req.param('name'));
         console.log(req.param('password'));
